@@ -146,7 +146,7 @@ def getUsuarioID(email):
     try:
         user = session.query(Usuario).filter_by(email=email).one()
         return user.id
-    except:
+    except Exception:
         return None
 
 
@@ -230,7 +230,7 @@ def novaCategoria():
                   'sucesso!' % novaCategoria.nome)
             session.commit()
             return redirect(url_for('showCategorias'))
-        except:
+        except Exception:
             flash('Erro ao criar nova categoria!')
             return redirect(url_for('showCategorias'))
     else:
@@ -354,7 +354,7 @@ def novoProdutoCategoria(categoria_id):
             flash('Produto %s foi adicionado com sucesso' % novoProduto.nome)
             return redirect(url_for('listaProdutos',
                                     categoria_id=categoria_id))
-        except:
+        except Exception:
             flash('Erro ao criar um novo produto!')
             return redirect(url_for('showCategorias'))
     else:
