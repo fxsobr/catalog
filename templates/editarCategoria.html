@@ -1,0 +1,30 @@
+{% extends "main.html" %}
+{% block content %}
+<div class="container">
+    <h4 class="center">Edição de Categoria</h4>
+    <form action="{{ url_for('editarCategoria',categoria_id = categoria.id)}}" method="post">
+        <div class="row col s9">
+            <div class="input-field col s12">
+                <i class="material-icons prefix">shopping_cart</i>
+                <input id="nome_categoria" name="nome" type="text"
+                       value="{{categoria.nome}}" class="validate">
+                <label for="nome_categoria">Nome da Categoria</label>
+            </div>
+        </div>
+        <div style="margin-right: 15px;" class="row left col s2">
+            <button type="submit" class="waves-effect waves-light btn-large green darken-1" id="submit"
+                    type="submit">
+                <i class="material-icons right">add</i>Salvar
+            </button>
+        </div>
+    </form>
+    <div class="row col s2">
+        <a href="{{url_for('showCategorias')}}">
+            <button type="submit" class="waves-effect waves-light btn-large red darken-1"
+                    type="submit">
+                <i class="material-icons right">keyboard_return</i>Cancelar
+            </button>
+        </a>
+    </div>
+</div>
+{% endblock %}

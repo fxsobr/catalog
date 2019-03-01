@@ -1,0 +1,196 @@
+{% extends "main.html" %}
+{% block content %}
+<div class="col s12 m8 offset-m2 l6 offset-l3">
+    <div class="card-panel grey lighten-5 z-depth-1">
+        <div class="row valign-wrapper">
+            <div class="col s2">
+              <span class="card-title center">
+                  <h1>{{ categoria.nome }}</h1>
+              </span>
+            </div>
+            <div class="col s8">
+              <span class="card-title right">
+                   {{ usuario.nome }}
+              </span>
+            </div>
+            <div class="col s2">
+                <img src="{{ usuario.imagem}}" alt="" class="circle responsive-img right">
+            </div>
+        </div>
+    </div>
+</div>
+{% if produtos !=[] %}
+<div class="row center">
+    <a href="{{url_for('novoProdutoCategoria', categoria_id = categoria.id)}}"
+       class="waves-effect waves-light btn-large green darken-1"><i class="material-icons left">add</i>Adicionar
+        Produtos</a>
+    <a href="{{url_for('editarCategoria', categoria_id = categoria.id)}}"
+       class="waves-effect waves-light btn-large yellow darken-2"><i class="material-icons left">create</i>Editar
+        Categoria</a>
+    <a href="{{url_for('excluirCategoria', categoria_id = categoria.id)}}"
+       class="waves-effect waves-light btn-large red darken-2"><i class="material-icons left">delete</i>Excluir
+        Categoria</a>
+</div>
+<div class="row">
+    <div class="col s3 center">
+        <div class="row">
+            <div class="card-panel red red lighten-2">
+        <span class="white-text"><h3>Agasalhos</h3>
+        </span>
+            </div>
+        </div>
+        {% for produto in produtos %}
+        {% if produto.tipo == 'agasalhos' %}
+        <div class="row">
+            <div class="card">
+                <div class="card-image">
+                    {% if produto.imagem == None %}
+                    <img src="{{ url_for('static', filename='imagem_fundo.jpg') }}">
+                    {% else %}
+                    <img src="{{ url_for('downloadImagemProduto',categoria_id = categoria.id)}}">
+                    {% endif %}
+                    <span class="card-title">{{produto.nome}}</span>
+                </div>
+                <div class="card-content">
+                    <div class="row">
+                        <p class="left left-align"><i class="material-icons left">attach_file</i>{{produto.descricao}}
+                        </p>
+                    </div>
+                    <div class="row">
+                        <p class="left"><i class="material-icons left">attach_money</i>{{produto.preco}}</p>
+                    </div>
+                    <div class="row">
+                        <p class="left"><i class="material-icons left">shopping_basket</i>{{produto.quantidade}}</p>
+                    </div>
+                </div>
+                <div class="card-action">
+                    <div class="row">
+                        <a href="{{url_for('editarProduto', categoria_id = categoria.id, produto_id=produto.id)}}"
+                           class="waves-effect waves-light btn-large yellow darken-2"><i class="material-icons left">create</i>Editar</a>
+
+                    </div>
+                    <div class="row">
+                        <a href="{{url_for('excluirProduto', categoria_id = categoria.id, produto_id=produto.id)}}"
+                           class="waves-effect waves-light btn-large red darken-2"><i
+                                class="material-icons left">delete</i>Excluir</a>
+
+                    </div>
+                </div>
+            </div>
+        </div>
+        {% endif %}
+        {% endfor %}
+    </div>
+    <div class="col s1"></div>
+    <div class="col s3 center">
+        <div class="row">
+            <div class="card-panel red red lighten-2">
+        <span class="white-text"><h3>Bandeiras</h3>
+        </span>
+            </div>
+        </div>
+        {% for produto in produtos %}
+        {% if produto.tipo == 'bandeiras' %}
+        <div class="row">
+            <div class="card">
+                <div class="card-image">
+                    {% if produto.imagem == None %}
+                    <img src="{{ url_for('static', filename='imagem_fundo.jpg') }}">
+                    {% else %}
+                    <img src="{{ url_for('downloadImagemProduto',produto_id = produto.id)}}">
+                    {% endif %}
+                    <span class="card-title">{{produto.nome}}</span>
+                </div>
+                <div class="card-content">
+                    <div class="row">
+                        <p class="left left-align"><i class="material-icons left">attach_file</i>{{produto.descricao}}
+                        </p>
+                    </div>
+                    <div class="row">
+                        <p class="left"><i class="material-icons left">attach_money</i>{{produto.preco}}</p>
+                    </div>
+                    <div class="row">
+                        <p class="left"><i class="material-icons left">shopping_basket</i>{{produto.quantidade}}</p>
+                    </div>
+                </div>
+                <div class="card-action">
+                    <div class="row">
+                        <a href="{{url_for('editarProduto', categoria_id = categoria.id, produto_id=produto.id)}}"
+                           class="waves-effect waves-light btn-large yellow darken-2"><i class="material-icons left">create</i>Editar</a>
+
+                    </div>
+                    <div class="row">
+                        <a href="{{url_for('excluirProduto', categoria_id = categoria.id, produto_id=produto.id)}}"
+                           class="waves-effect waves-light btn-large red darken-2"><i
+                                class="material-icons left">delete</i>Excluir</a>
+
+                    </div>
+                </div>
+            </div>
+        </div>
+        {% endif %}
+        {% endfor %}
+    </div>
+    <div class="col s1"></div>
+    <div class="col s3 center">
+        <div class="row">
+            <div class="card-panel red red lighten-2">
+        <span class="white-text"><h3>Camisetas</h3>
+        </span>
+            </div>
+        </div>
+
+        {% for produto in produtos %}
+        {% if produto.tipo == 'camisetas' %}
+        <div class="row">
+            <div class="card">
+                <div class="card-image">
+                    {% if produto.imagem == None %}
+                    <img src="{{ url_for('static', filename='imagem_fundo.jpg') }}">
+                    {% else %}
+                    <img src="{{ url_for('downloadImagemProduto',produto_id = produto.id)}}">
+                    {% endif %}
+                    <span class="card-title">{{produto.nome}}</span>
+                </div>
+                <div class="card-content">
+                    <div class="row">
+                        <p class="left left-align"><i class="material-icons left">attach_file</i>{{produto.descricao}}
+                        </p>
+                    </div>
+                    <div class="row">
+                        <p class="left"><i class="material-icons left">attach_money</i>{{produto.preco}}</p>
+                    </div>
+                    <div class="row">
+                        <p class="left"><i class="material-icons left">shopping_basket</i>{{produto.quantidade}}</p>
+                    </div>
+                </div>
+                <div class="card-action">
+                    <div class="row">
+                        <a href="{{url_for('editarProduto', categoria_id = categoria.id, produto_id=produto.id)}}"
+                           class="waves-effect waves-light btn-large yellow darken-2"><i class="material-icons left">create</i>Editar</a>
+
+                    </div>
+                    <div class="row">
+                        <a href="{{url_for('excluirProduto', categoria_id = categoria.id, produto_id=produto.id)}}"
+                           class="waves-effect waves-light btn-large red darken-2"><i
+                                class="material-icons left">delete</i>Excluir</a>
+
+                    </div>
+                </div>
+            </div>
+        </div>
+        {% endif %}
+        {% endfor %}
+    </div>
+</div>
+{% else %}
+<div class="row center">
+    <a href="{{url_for('novoProdutoCategoria', categoria_id = categoria.id)}}"
+       class="waves-effect waves-light btn-large green darken-1"><i class="material-icons left">add</i>Adicionar
+        Produtos</a>
+</div>
+<div class="row">
+    <h4 class="center">Nenhum Produto Encontrado</h4>
+</div>
+{% endif %}
+{% endblock %}

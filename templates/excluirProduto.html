@@ -1,0 +1,24 @@
+{% extends "main.html" %}
+{% block content %}
+<div class="container">
+    <h4 class="center">Exclusão de Produto</h4>
+    <h5 class="center"> Você tem certeza que gostaria de excluir o produto:</h5>
+    <h3 class="center orange-text">{{produto.nome}}</h3>
+    <form action="#" method='post'>
+        <div style="margin-right: 15px;" class="row center left">
+            <button type="submit" class="waves-effect waves-light btn-large green darken-1" id="submit"
+                    type="submit">
+                <i class="material-icons right">delete</i>Excluir
+            </button>
+        </div>
+    </form>
+    <div class="row">
+        <a href="{{url_for('showCategorias')}}">
+            <button type="submit" class="waves-effect waves-light btn-large red darken-1"
+                    type="submit">
+                <i class="material-icons right">keyboard_return</i>Cancelar
+            </button>
+        </a>
+    </div>
+</div>
+{% endblock %}

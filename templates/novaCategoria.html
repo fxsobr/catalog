@@ -1,0 +1,40 @@
+{% extends "main.html" %}
+{% block content %}
+<div class="container">
+    <div class="row">
+        <h3>
+            Nova Categoria
+        </h3>
+    </div>
+    <div class="row">
+        <form class="col s12" action="#" method="post" enctype="multipart/form-data">
+            <div class="row">
+                <div class="input-field col s6">
+                    <i class="material-icons prefix">shopping_cart</i>
+                    <input placeholder="Informe o nome da nova categoria" id="nome_categoria" name="nome" type="text"
+                           class="validate">
+                    <label for="nome_categoria">Nome da Categoria</label>
+                </div>
+                <div class="col s6">
+                    <div class="file-field input-field">
+                        <div class="btn">
+                            <span>Inserir Imagem</span>
+                            <input type="file" name="imagem">
+                        </div>
+                        <div class="file-path-wrapper">
+                            <input class="file-path validate" type="text">
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="row center">
+                <button type="submit" class="waves-effect waves-light btn-large green darken-1" id="submit"
+                        type="submit">
+                    <i class="material-icons right">add</i>Criar Categoria
+                </button>
+            </div>
+        </form>
+    </div>
+
+</div>
+{% endblock %}

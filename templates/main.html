@@ -1,0 +1,82 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8"/>
+    <title>Projeto Catalogo | Marcelo Ceolin</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link href="{{ url_for('static', filename='materialize.min.css') }}" rel="stylesheet" type="text/css">
+    <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+</head>
+<body>
+<header>
+    <div class="container">
+        <nav class="nav-extended" style="margin-top: 25px">
+            <div class="nav-wrapper">
+                <ul class="left">
+                    <li><a href="{{url_for('showCategorias')}}"><i class="material-icons right">account_balance</i>Categorias</a>
+                    </li>
+                </ul>
+                <ul class="right hide-on-med-and-down">
+                    {%if 'username' not in session %}
+                    <li><a href="{{url_for('showLogin')}}"><i class="material-icons right">person_outline</i>Login</a>
+                    </li>
+                    {% else %}
+                    <li><a href="{{url_for('disconnect')}}"><i class="material-icons right">person_outline</i>Sair</a>
+                    </li>
+                    {% endif %}
+                </ul>
+            </div>
+        </nav>
+        {% with messages = get_flashed_messages() %}
+        {% if messages %}
+        <div class="container">
+            <div class="row">
+                {% for message in messages %}
+                <div class="col s2"></div>
+                <div class="col s8 center">
+                    <div class="card green darken-1">
+                        <div class="card-content white-text">
+                            <p>{{ message }}</p>
+                        </div>
+                    </div>
+                </div>
+                {% endfor %}
+            </div>
+            <div class="col s2"></div>
+        </div>
+        {% endif %}
+        {% endwith %}
+        <div class="row">
+            <div class="col s12">
+                <div class="card blue-grey darken-1">
+                    <div class="card-content white-text center">
+                        <h3>LOJA DE ARTIGOS ESPORTIVOS</h3>
+                        <span>Fullstack Nanodegree</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</header>
+<main>
+    <section>
+        <div class="container">
+            {% block content %}
+            {% endblock %}
+        </div>
+    </section>
+    <div class="container">
+        <footer class="page-footer">
+            <div class="footer-copyright">
+                <div class="container">
+                    &copy; 2019 Marcelo Ceolin
+                </div>
+            </div>
+        </footer>
+    </div>
+    <script type="text/javascript" src="{{ url_for('static', filename='materialize.min.js') }}"></script>
+    <script src="//ajax.googleapis.com/ajax/libs/jquery/1.8.2/jquery.min.js"></script>
+    <script src="//apis.google.com/js/platform.js?onload=start"></script>
+</main>
+</body>
+</html>
