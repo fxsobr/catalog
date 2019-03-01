@@ -9,18 +9,18 @@
             <div class="input-field col s6">
                 <i class="material-icons prefix">shopping_cart</i>
                 <input placeholder="Informe o nome do Produto" id="nome_produto" name="nome" type="text"
-                       value="{{item.nome}}" class="validate">
+                       value="{{item.nome}}" class="validate" required>
                 <label for="nome_produto">Nome do Produto</label>
             </div>
             <div class="input-field col s2">
                 <i class="material-icons prefix">attach_money</i>
-                <input id="preco_produto" type="text" name="preco" value="{{item.preco}}" class="validate">
+                <input id="preco_produto" type="text" name="preco" value="{{item.preco}}" class="validate" required>
                 <label for="preco_produto">Preço</label>
             </div>
             <div class="input-field col s2">
                 <i class="material-icons prefix">clear_all</i>
                 <input id="quantidade_produto" type="text" name="quantidade" value="{{item.quantidade}}"
-                       class="validate">
+                       class="validate" required>
                 <label for="quantidade_produto">Quantidade</label>
             </div>
         </div>
@@ -28,7 +28,7 @@
             <div class="input-field col s12">
                 <i class="material-icons prefix">short_text</i>
                 <textarea id="descricao_produto" name="descricao"
-                          class="materialize-textarea">{{item.descricao}}</textarea>
+                          class="materialize-textarea" required>{{item.descricao}}</textarea>
                 <label for="descricao_produto">Descrição</label>
             </div>
         </div>

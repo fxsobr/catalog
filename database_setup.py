@@ -5,6 +5,7 @@ from sqlalchemy import create_engine
 
 Base = declarative_base()
 
+
 class Usuario(Base):
     __tablename__ = 'usuario'
 
@@ -12,6 +13,7 @@ class Usuario(Base):
     nome = Column(String(250), nullable=False)
     email = Column(String(250), nullable=False)
     imagem = Column(String(250))
+
 
 class Categoria(Base):
     __tablename__ = 'categoria'
@@ -29,6 +31,7 @@ class Categoria(Base):
             'nome': self.nome
         }
 
+
 class Produto(Base):
     __tablename__ = 'produto'
 
@@ -39,7 +42,7 @@ class Produto(Base):
     preco = Column(String(8), nullable=False)
     quantidade = Column(String(5), nullable=False)
     imagem = Column(LargeBinary)
-    categoria_id = Column(Integer, ForeignKey('categoria.id', ondelete='CASCADE'))
+    categoria_id = Column(Integer, ForeignKey('categoria.id'))
     categoria = relationship(Categoria)
     usuario_id = Column(Integer, ForeignKey('usuario.id'))
     usuario = relationship(Usuario)
@@ -54,6 +57,7 @@ class Produto(Base):
             'quantidade': self.quantidade,
             'categoria_id': self.categoria_id
         }
+
 
 engine = create_engine('sqlite:///catalogo.db')
 

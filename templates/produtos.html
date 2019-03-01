@@ -47,7 +47,7 @@
                     {% if produto.imagem == None %}
                     <img src="{{ url_for('static', filename='imagem_fundo.jpg') }}">
                     {% else %}
-                    <img src="{{ url_for('downloadImagemProduto',categoria_id = categoria.id)}}">
+                    <img src="{{ url_for('downloadImagemProduto',produto_id = produto.id)}}">
                     {% endif %}
                     <span class="card-title">{{produto.nome}}</span>
                 </div>

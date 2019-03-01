@@ -124,6 +124,7 @@ def gconnect():
     print "done!"
     return output
 
+
 # Cria usuário
 def createUsuario(login_session):
     novoUsuario = Usuario(nome=login_session['username'], email=login_session[
@@ -147,6 +148,7 @@ def getUsuarioID(email):
         return user.id
     except:
         return None
+
 
 # Configuração de logout Google
 @app.route('/gdisconnect')
@@ -218,14 +220,19 @@ def novaCategoria():
     if 'username' not in login_session:
         return redirect('/login')
     if request.method == 'POST':
-        insereImagem = request.files['imagem']
-        novaCategoria = Categoria(
-            nome=request.form['nome'], imagem=insereImagem.read(),
-            usuario_id=login_session['user_id'])
-        session.add(novaCategoria)
-        flash('Nova Categoria %s foi criada com sucesso!' % novaCategoria.nome)
-        session.commit()
-        return redirect(url_for('showCategorias'))
+        try:
+            insereImagem = request.files['imagem']
+            novaCategoria = Categoria(
+                nome=request.form['nome'], imagem=insereImagem.read(),
+                usuario_id=login_session['user_id'])
+            session.add(novaCategoria)
+            flash('Nova Categoria %s foi criada com '
+                  'sucesso!' % novaCategoria.nome)
+            session.commit()
+            return redirect(url_for('showCategorias'))
+        except:
+            flash('Erro ao criar nova categoria!')
+            return redirect(url_for('showCategorias'))
     else:
         return render_template('novaCategoria.html')
 
@@ -298,6 +305,7 @@ def listaProdutos(categoria_id):
                                usuario=usuario)
 
 
+# Lista todos os Produtos
 @app.route('/categoria/<int:categoria_id>/produtos/JSON')
 def listaProdutosJSON(categoria_id):
     """Lista todos os produtos no formato JSON,
@@ -306,6 +314,13 @@ def listaProdutosJSON(categoria_id):
     produtos = session.query(Produto).filter_by(
         categoria_id=categoria_id).all()
     return jsonify(Produtos=[produto.serialize for produto in produtos])
+
+
+# Lista um produto especifico
+@app.route('/categoria/<int:categoria_id>/produtos/<int:produto_id>/JSON')
+def listaProduto(categoria_id, produto_id):
+    listaProduto = session.query(Produto).filter_by(id=produto_id).one()
+    return jsonify(listaProduto=listaProduto.serialize)
 
 
 # Cria um novo produto
@@ -324,19 +339,24 @@ def novoProdutoCategoria(categoria_id):
                " produtos.');}</script><body onload='myFunction(" \
                ")'> "
     if request.method == 'POST':
-        insereImagem = request.files['imagem']
-        novoProduto = Produto(nome=request.form['nome'],
-                              descricao=request.form['descricao'],
-                              tipo=request.form['tipo'],
-                              preco=request.form['preco'],
-                              quantidade=request.form['quantidade'],
-                              imagem=insereImagem.read(),
-                              categoria_id=categoria_id,
-                              usuario_id=categoria.usuario_id)
-        session.add(novoProduto)
-        session.commit()
-        flash('Produto %s foi adicionado com sucesso' % novoProduto.nome)
-        return redirect(url_for('listaProdutos', categoria_id=categoria_id))
+        try:
+            insereImagem = request.files['imagem']
+            novoProduto = Produto(nome=request.form['nome'],
+                                  descricao=request.form['descricao'],
+                                  tipo=request.form['tipo'],
+                                  preco=request.form['preco'],
+                                  quantidade=request.form['quantidade'],
+                                  imagem=insereImagem.read(),
+                                  categoria_id=categoria_id,
+                                  usuario_id=categoria.usuario_id)
+            session.add(novoProduto)
+            session.commit()
+            flash('Produto %s foi adicionado com sucesso' % novoProduto.nome)
+            return redirect(url_for('listaProdutos',
+                                    categoria_id=categoria_id))
+        except:
+            flash('Erro ao criar um novo produto!')
+            return redirect(url_for('showCategorias'))
     else:
         return render_template('novoProduto.html', categoria_id=categoria_id)
 
